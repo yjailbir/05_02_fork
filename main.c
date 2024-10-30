@@ -19,6 +19,11 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
     return;
   }
 
+  if (mg_http_match_uri(hm, "/api/json")) {
+    mg_http_reply(c, 200, "Content-Type: application/json\r\n", "{\"status\": \"ok\"}");
+    return;
+  }
+
   mg_http_reply(c, 200, "", "%s\n", "It works!");
 }
 
